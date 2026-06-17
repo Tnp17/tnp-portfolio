@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#bcc7de",
+                        "on-surface-variant": "#45474c",
+                        "on-tertiary-fixed-variant": "#004d66",
+                        "on-secondary-fixed": "#07006c",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "secondary-fixed": "#e1e0ff",
+                        "on-secondary-container": "#fffbff",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#c0e8ff",
+                        "surface-variant": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "tertiary-fixed-dim": "#7bd1fa",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#6063ee",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "surface-container": "#eceef0",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary-container": "#3e9ac0",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "on-tertiary-fixed": "#001e2b",
+                        "primary": "#091426",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "surface-container-high": "#e6e8ea",
+                        "inverse-primary": "#bcc7de",
+                        "tertiary-container": "#002d3d",
+                        "primary-container": "#1e293b",
+                        "on-primary-container": "#8590a6",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container-highest": "#e0e3e5",
+                        "outline": "#75777d",
+                        "surface-tint": "#545f73",
+                        "primary-fixed": "#d8e3fb",
+                        "on-surface": "#191c1e",
+                        "inverse-on-surface": "#eff1f3",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c5c6cd",
+                        "on-primary-fixed": "#111c2d",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "secondary": "#4648d4",
+                        "tertiary": "#001721",
+                        "on-background": "#191c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "stack-sm": "12px",
+                        "section-padding": "120px",
+                        "container-max": "1280px",
+                        "stack-lg": "48px",
+                        "stack-md": "24px",
+                        "gutter": "32px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h1": ["Inter"],
+                        "h2": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["1rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["0.75rem", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "h3": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "0", "fontWeight": "600" }],
+                        "body-lg": ["1.125rem", { "lineHeight": "1.75", "fontWeight": "400" }],
+                        "h1": ["3.75rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h2": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .stature-bar {
+            border-left: 4px solid #4648d4;
+        }
+
+        .ambient-shadow {
+            box-shadow: 0 20px 25px -5px rgba(30, 41, 59, 0.04);
+        }
+
+        .nav-link-active {
+            color: #4648d4;
+            border-bottom: 2px solid #4648d4;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-open {
+                display: flex !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body-md antialiased"><!-- Lightbox Modal -->
+    <div class="fixed inset-0 z-[100] bg-primary/95 backdrop-blur-sm hidden flex-items-center justify-center p-4 md:p-10 cursor-zoom-out"
+        id="lightbox">
+        <div class="relative max-w-5xl w-full h-full flex items-center justify-center">
+            <button aria-label="Close Lightbox"
+                class="absolute top-0 -right-4 md:-right-10 text-on-primary hover:text-secondary transition-colors p-2"
+                id="lightbox-close">
+                <span class="material-symbols-outlined text-4xl">close</span>
+            </button>
+            <img alt="Enlarged project view" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                id="lightbox-img" src="" />
+        </div>
+    </div>
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/50">
+        <div
+            class="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent">
+        </div>
+
+        <div class="flex justify-between items-center px-6 py-5 max-w-7xl mx-auto w-full">
+            <a class="font-['Inter'] text-lg font-bold tracking-tighter text-white hover:text-purple-400 transition-colors truncate max-w-[200px] sm:max-w-none"
+                href="#">
+                THANAPORN HONGTHONG
+            </a>
+
+            <div class="hidden md:flex items-center gap-10">
+                <a class="nav-link text-slate-400 hover:text-purple-400 transition-all font-mono text-[14px] tracking-[0.2em] uppercase relative group"
+                    href="#summary">
+                    Summary
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-[1px] bg-purple-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a class="nav-link text-slate-400 hover:text-purple-400 transition-all font-mono text-[14px] tracking-[0.2em] uppercase relative group"
+                    href="#experience">
+                    Experience
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-[1px] bg-purple-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a class="nav-link text-slate-400 hover:text-purple-400 transition-all font-mono text-[14px] tracking-[0.2em] uppercase relative group"
+                    href="#showcase">
+                    Showcase
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-[1px] bg-purple-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a class="nav-link text-slate-400 hover:text-purple-400 transition-all font-mono text-[14px] tracking-[0.2em] uppercase relative group"
+                    href="#expertise">
+                    Expertise
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-[1px] bg-purple-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a class="nav-link text-slate-400 hover:text-purple-400 transition-all font-mono text-[14px] tracking-[0.2em] uppercase relative group"
+                    href="#education">
+                    Education
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-[1px] bg-purple-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a class="nav-link text-slate-400 hover:text-purple-400 transition-all font-mono text-[14px] tracking-[0.2em] uppercase relative group"
+                    href="#contact">
+                    Contact
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-[1px] bg-purple-500 transition-all group-hover:w-full"></span>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="CV-Thanaporn Hongthong.pdf" download
+                    class="relative group px-5 py-2.5 bg-slate-900 border border-slate-700 rounded-full overflow-hidden transition-all hover:border-purple-500/50">
+                    <div class="absolute inset-0 bg-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <span
+                        class="relative font-['Inter'] text-sm font-semibold text-slate-200 group-hover:text-white whitespace-nowrap">
+                        Download CV
+                    </span>
+                </a>
+
+                <button aria-label="Toggle Menu" class="md:hidden p-2 text-slate-400 hover:text-white"
+                    id="mobile-menu-toggle">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Nav Menu -->
+        <div class="hidden flex-col bg-slate-950/95 backdrop-blur-2xl border-b border-slate-800 px-6 py-8 space-y-6 md:hidden"
+            id="mobile-menu">
+            <a class="text-slate-300 hover:text-purple-400 font-mono text-sm tracking-widest uppercase transition-colors"
+                href="#summary">Summary</a>
+            <a class="text-slate-300 hover:text-purple-400 font-mono text-sm tracking-widest uppercase transition-colors"
+                href="#experience">Experience</a>
+            <a class="text-slate-300 hover:text-purple-400 font-mono text-sm tracking-widest uppercase transition-colors"
+                href="#showcase">Showcase</a>
+            <a class="text-slate-300 hover:text-purple-400 font-mono text-sm tracking-widest uppercase transition-colors"
+                href="#expertise">Expertise</a>
+            <a class="text-slate-300 hover:text-purple-400 font-mono text-sm tracking-widest uppercase transition-colors"
+                href="#education">Education</a>
+            <a class="text-slate-300 hover:text-purple-400 font-mono text-sm tracking-widest uppercase transition-colors"
+                href="#contact">Contact</a>
+        </div>
+    </nav>
+    <main class="bg-[#030712] pt-20">
+        <!-- Hero Section -->
+        <section
+            class="relative max-w-7xl mx-auto px-6 py-24 md:py-36 flex flex-col items-center justify-center overflow-hidden"
+            id="summary">
+
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-purple-600/20 to-cyan-500/20 blur-[80px] pointer-events-none z-0">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full border border-purple-500/10 opacity-50 dashed animate-[spin_60s_linear_infinite] pointer-events-none z-0 hidden md:block">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full border border-cyan-500/5 opacity-30 pointer-events-none z-0 hidden md:block">
+            </div>
+
+            <div class="max-w-3xl flex flex-col items-center text-center space-y-8 relative z-10">
+
+                <div class="flex items-center justify-center gap-4">
+                    <div class="h-12 w-[4px] bg-gradient-to-b from-purple-500 to-cyan-400 rounded-full"></div>
+                    <h1 class="font-['Inter'] text-5xl md:text-7xl font-bold text-white tracking-tight leading-none">
+                        UX/UI <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Designer</span>
+                    </h1>
+                </div>
+
+                <p class="font-['Inter'] text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed">
+                    A technical-minded <span class="text-white font-medium">UI/UX Designer</span> with 1.5 years of
+                    experience in mobile development. I specialize
+                    in bridging the gap between Figma and production-ready code, leveraging my <span
+                        class="text-purple-400 font-medium">Computer Science</span>
+                    background from <span class="text-cyan-400 font-medium">Thammasat University</span> to deliver
+                    user-centric interfaces built for seamless
+                    implementation.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-5 pt-4 w-full sm:w-auto">
+                    <a class="relative group overflow-hidden bg-purple-600 text-white px-10 py-4 rounded-xl font-bold transition-all hover:bg-purple-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] text-center min-w-[180px]"
+                        href="#experience">
+                        <span
+                            class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
+                        Work History
+                    </a>
+                    <a class="border border-slate-700 text-slate-200 px-10 py-4 rounded-xl font-bold hover:bg-slate-800/60 hover:border-cyan-500 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all text-center backdrop-blur-sm min-w-[180px]"
+                        href="#contact">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+
+        </section>
+        <!-- Work Experience -->
+        <section class="bg-[#030712] py-20 md:py-32 relative overflow-hidden" id="experience">
+            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px]"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="border-l-4 border-purple-500 pl-6 mb-16">
+                    <h2 class="text-4xl font-bold text-white tracking-tight">Work Experience</h2>
+                    <p class="text-purple-400/60 mt-2 font-mono text-sm uppercase tracking-widest">Roles & Contributions
+                    </p>
+                </div>
+
+                <div class="space-y-12">
+                    <div
+                        class="group relative p-8 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-purple-500/50 transition-all duration-500 overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 relative z-10">
+                            <div class="lg:col-span-1">
+                                <p class="font-mono text-purple-400 mb-2 uppercase text-sm tracking-wider">Jan — Dec
+                                    2023</p>
+                                <h3 class="text-xl font-bold text-white leading-tight">Software Developer (Front-end) &
+                                    Research Assistant</h3>
+                                <p class="text-slate-300 mt-2">NECTEC, NSTDA</p>
+                                <div
+                                    class="inline-block mt-3 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-xs font-medium text-purple-300">
+                                    Full-time Contract (1 Year)</div>
+                                <p
+                                    class="mt-6 font-['Inter'] text-[12px] text-slate-200 uppercase tracking-[0.1em] leading-relaxed">
+                                    Project: Traffy Fondue Extensions & Enterprise Solutions
+                                </p>
+                            </div>
+
+                            <div class="lg:col-span-3 space-y-8">
+                                <ul class="list-none space-y-4 text-slate-300">
+                                    <li class="flex items-start gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-purple-500 mt-1 text-sm">terminal</span>
+                                        <span><span class="font-bold text-white">Figma-to-Development Scaling:</span>
+                                            Collaborated with lead designers in Figma to implement and scale a bilingual
+                                            (Thai/English) web interface into customized platforms for various
+                                            governmental organizations, ensuring seamless accessibility for
+                                            international users.</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-purple-500 mt-1 text-sm">terminal</span>
+                                        <span><span class="font-bold text-white">Enterprise UX Customization:</span>
+                                            Designed and implemented a specialized Status Tracking LINE Chatbot for
+                                            diverse organizations by optimizing user flows in Figma to simplify complex
+                                            case-monitoring into an intuitive 5-step process, improved internal
+                                            operational efficiency by 20%.</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-purple-500 mt-1 text-sm">terminal</span>
+                                        <span><span class="font-bold text-white">Feasibility-Driven UI
+                                                Development:</span> Contributed to a Figma-based design system by
+                                            ensuring all UI components were aligned with technical feasibility, reducing
+                                            design revision cycles by 25% and eliminating handoff friction during
+                                            implementation.</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-purple-500 mt-1 text-sm">terminal</span>
+                                        <span><span class="font-bold text-white">Cross-functional Collaboration:</span>
+                                            Maintained high design fidelity by facilitating seamless handoffs between
+                                            Figma and Front-end development, improving overall feature delivery speed by
+                                            15%.</span>
+                                    </li>
+                                </ul>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    <div
+                                        class="p-4 rounded-xl bg-slate-950/50 border border-slate-800 group-hover:border-purple-500/30 transition-colors">
+                                        <span class="block text-2xl font-bold text-purple-400">20% Increase</span>
+                                        <span
+                                            class="text-[12px] font-mono uppercase text-slate-500 tracking-widest">Internal
+                                            Operational Efficiency</span>
+                                    </div>
+                                    <div
+                                        class="p-4 rounded-xl bg-slate-950/50 border border-slate-800 group-hover:border-purple-500/30 transition-colors">
+                                        <span class="block text-2xl font-bold text-purple-400">25% Decrease</span>
+                                        <span
+                                            class="text-[12px] font-mono uppercase text-slate-500 tracking-widest">Revision
+                                            cycles</span>
+                                    </div>
+                                    <div
+                                        class="p-4 rounded-xl bg-slate-950/50 border border-slate-800 group-hover:border-purple-500/30 transition-colors">
+                                        <span class="block text-2xl font-bold text-purple-400">15% Increase</span>
+                                        <span
+                                            class="text-[12px] font-mono uppercase text-slate-500 tracking-widest">Delivery
+                                            speed</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-purple-400 hover:border-purple-500/50 transition-all cursor-default">Figma</span>
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-purple-400 hover:border-purple-500/50 transition-all cursor-default">web
+                                        design</span>
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-purple-400 hover:border-purple-500/50 transition-all cursor-default">design-to-code</span>
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-purple-400 hover:border-purple-500/50 transition-all cursor-default">handoff</span>
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-purple-400 hover:border-purple-500/50 transition-all cursor-default">Accessibility</span>
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-purple-400 hover:border-purple-500/50 transition-all cursor-default">System
+                                        Analysis</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="group relative p-8 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 relative z-10">
+                            <div class="lg:col-span-1">
+                                <p class="font-mono text-cyan-400 mb-2 uppercase text-sm tracking-wider">June — Dec 2022
+                                </p>
+                                <h3 class="text-xl font-bold text-white leading-tight">Mobile Application Developer</h3>
+                                <p class="text-slate-300 mt-2">NECTEC, NSTDA</p>
+                                <div
+                                    class="inline-block mt-3 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-xs font-medium text-cyan-300">
+                                    Internship (6 Months)</div>
+                                <p
+                                    class="mt-6 font-['Inter'] text-[12px] text-slate-200 uppercase tracking-[0.1em] leading-relaxed">
+                                    Project: Traffy Fondue
+                                </p>
+                            </div>
+
+                            <div class="lg:col-span-3 space-y-8">
+                                <ul class="list-none space-y-4 text-slate-300">
+                                    <li class="flex items-start gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-cyan-500 mt-1 text-sm">terminal</span>
+                                        <span>
+                                            <span class="font-bold text-white">User-Centric UI Development:</span>
+                                            Developed and optimized mobile interfaces using React Native with a focus on
+                                            accessibility, improving case management efficiency for government agencies
+                                            by over 30% through simplified task-driven layouts.</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-cyan-500 mt-1 text-sm">terminal</span>
+                                        <span><span class="font-bold text-white">User Research & Data
+                                                Utilization:</span> Analyzed user feedback and pain points gathered from
+                                            monthly training sessions to
+                                            iteratively improve the user flow, resulting in a 20% reduction in user
+                                            drop-off rate.</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-cyan-500 mt-1 text-sm">terminal</span>
+                                        <span>
+                                            <span class="font-bold text-white">Iterative Design Strategy:</span>
+                                            Collaborated with the field team to translate real user challenges into
+                                            intuitive UI solutions.</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-cyan-500 mt-1 text-sm">terminal</span>
+                                        <span>
+                                            <span class="font-bold text-white">Design-to-Dev Synergy:</span> Leveraged
+                                            JavaScript and UI design principles to build reusable components, reducing
+                                            development time for new features by 15% while ensuring high design fidelity
+                                            across the application.</span>
+                                    </li>
+                                </ul>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    <div
+                                        class="p-4 rounded-xl bg-slate-950/50 border border-slate-800 group-hover:border-cyan-500/30 transition-colors">
+                                        <span class="block text-2xl font-bold text-cyan-400">30% Increase</span>
+                                        <span
+                                            class="text-[12px] font-mono uppercase text-slate-500 tracking-widest">Case
+                                            management Efficiency</span>
+                                    </div>
+                                    <div
+                                        class="p-4 rounded-xl bg-slate-950/50 border border-slate-800 group-hover:border-cyan-500/30 transition-colors">
+                                        <span class="block text-2xl font-bold text-cyan-400">20% Decrease</span>
+                                        <span
+                                            class="text-[12px] font-mono uppercase text-slate-500 tracking-widest">User
+                                            Drop-off Rate
+                                            rate</span>
+                                    </div>
+                                    <div
+                                        class="p-4 rounded-xl bg-slate-950/50 border border-slate-800 group-hover:border-cyan-500/30 transition-colors">
+                                        <span class="block text-2xl font-bold text-cyan-400">15% Decrease</span>
+                                        <span
+                                            class="text-[12px] font-mono uppercase text-slate-500 tracking-widest">Development
+                                            time</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-default">figma</span>
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-default">react
+                                        native</span>
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-default">mobile
+                                        design</span>
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-default">User
+                                        Experience</span>
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-default">user
+                                        research</span>
+                                    <span
+                                        class="bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700 text-[12px] uppercase font-mono text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-default">user
+                                        flow</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Project-Showcase -->
+        <section class="py-20 bg-[#030712]" id="showcase">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="border-l-4 border-emerald-500 pl-6 mb-16">
+                    <h2 class="text-4xl font-bold text-white tracking-tight">Project Showcase</h2>
+                </div>
+
+                <div
+                    class="relative group overflow-hidden rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+
+                    <div id="project-slider" class="flex transition-transform duration-700 ease-in-out">
+                        <div class="min-w-full relative aspect-video">
+                            <!--16:9 and hover:scale-105 transition-transform duration-500 for zoom img-->
+                            <img src="pic\image1.png"
+                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
+                                onclick="openLightbox(this.src)">
+                            <div class="absolute bottom-0 inset-x-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
+                                <p class="text-slate-300 font-mono text-[13px] tracking-wide uppercase">Formalizing the
+                                    future of urban innovation through
+                                    a strategic partnership between BMA and NSTDA</p>
+                            </div>
+                        </div>
+                        <div class="min-w-full relative aspect-video"> <!--16:9-->
+                            <img src="pic/image2.png"
+                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
+                                onclick="openLightbox(this.src)">
+                            <div class="absolute bottom-0 inset-x-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
+                                <p class="text-slate-300 font-mono text-[13px] tracking-wide uppercase">Supporting urban
+                                    problem-solving at scale through
+                                    collaborative research and user-centric design strategy</p>
+                            </div>
+                        </div>
+                        <div class="min-w-full relative aspect-video"> <!--16:9-->
+                            <img src="pic\image3.png"
+                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
+                                onclick="openLightbox(this.src)">
+                            <div class="absolute bottom-0 inset-x-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
+                                <p class="text-slate-300 font-mono text-[13px] tracking-wide uppercase">Integrating
+                                    professional-grade standards into
+                                    enterprise extensions for seamless governmental operations</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center z-20
+                        bg-slate-900/80 backdrop-blur-md border border-cyan-500/50 text-cyan-400 rounded-full 
+                        shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] 
+                        hover:bg-cyan-500 hover:text-white transition-all duration-300">
+                        <span class="text-2xl">❮</span>
+                    </button>
+
+                    <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center z-20
+                        bg-slate-900/80 backdrop-blur-md border border-cyan-500/50 text-cyan-400 rounded-full 
+                        shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] 
+                        hover:bg-cyan-500 hover:text-white transition-all duration-300">
+                        <span class="text-2xl">❯</span>
+                    </button>
+                </div>
+
+                <div
+                    class="mt-12 bg-[#0d1117]/80 backdrop-blur-md rounded-2xl border border-slate-800 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.5)] group overflow-hidden relative">
+
+                    <div
+                        class="absolute -bottom-24 -right-24 w-80 h-80 bg-purple-600/10 rounded-full blur-[100px] opacity-60">
+                    </div>
+
+                    <div class="flex items-center gap-4 mb-8 border-b border-slate-800 pb-6 relative z-10">
+                        <div
+                            class="w-12 h-12 bg-slate-900 rounded-xl border border-slate-700 flex items-center justify-center group-hover:border-purple-500/50 transition-colors">
+                            <span
+                                class="material-symbols-outlined text-purple-400 group-hover:text-purple-300">handshake</span>
+                        </div>
+                        <div>
+                            <span
+                                class="font-mono text-[10px] text-cyan-400/70 uppercase tracking-widest block mb-1">Project
+                                Note</span>
+                            <h4 class="font-['Inter'] text-2xl font-semibold text-white tracking-tight">BMA × NSTDA
+                                Collaboration</h4>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-8 mb-10 z-10">
+                        <div
+                            class="absolute left-0 top-0 w-[1px] h-full bg-gradient-to-b from-purple-500 via-cyan-500 to-transparent">
+                        </div>
+
+                        <p
+                            class="font-['Inter'] text-slate-300 text-lg leading-relaxed group-hover:text-white transition-colors duration-300">
+                            Designed and improved the user experience for the
+                            <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 font-medium">Traffy
+                                Fondue</span>
+                            enterprise extensions.
+                            This project is a collaboration between <span class="text-white font-semibold">BMA and
+                                NSTDA</span>,
+                            focusing on making urban reporting tools more efficient for professional use
+                            and supporting seamless work between government sectors.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6 border-t border-slate-800/50 z-10">
+                        <div class="space-y-1.5">
+                            <span class="font-mono text-[12px] text-slate-500 uppercase tracking-widest block mb-1">What
+                                I did</span>
+                            <p class="text-slate-200 text-base flex items-center gap-2.5">
+                                <span
+                                    class="w-1.5 h-1.5 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.7)]"></span>
+                                UX/UI Design & Supporting Research
+                            </p>
+                        </div>
+                        <div class="space-y-1.5">
+                            <span
+                                class="font-mono text-[12px] text-slate-500 uppercase tracking-widest block mb-1">Partners</span>
+                            <p class="text-slate-200 text-base flex items-center gap-2.5">
+                                <span
+                                    class="w-1.5 h-1.5 bg-cyan-500 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.7)]"></span>
+                                BMA & NSTDA
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            let currentSlide = 0;
+            const slider = document.getElementById('project-slider');
+            const totalSlides = slider.children.length;
+
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            }
+
+            // สไลด์อัตโนมัติทุกๆ 5 วินาที
+            setInterval(nextSlide, 5000);
+
+            // ฟังก์ชันขยายรูป
+            function openLightbox(src) {
+                window.open(src, '_blank');
+            }
+        </script>
+
+        <!-- Area of Expertise -->
+        <section class="py-20 bg-[#030712] relative overflow-hidden" id="expertise">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="border-l-4 border-cyan-500 pl-6 mb-16">
+                    <h2 class="text-4xl font-bold text-white tracking-tight">Area of Expertise</h2>
+                    <p class="text-cyan-400/60 mt-2 font-mono text-sm uppercase tracking-widest">Technical Capabilities
+                        & Methods</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div
+                        class="group relative p-8 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div
+                            class="w-14 h-14 bg-cyan-500/20 rounded-xl flex items-center justify-center mb-8 border border-cyan-500/30 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-cyan-400 text-3xl">architecture</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-6">Design Tools & Methods</h3>
+                        <ul class="space-y-4">
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-cyan-50 transition-colors">
+                                <span class="material-symbols-outlined text-cyan-500 text-[18px]">check_circle</span>
+                                Figma Systems
+                            </li>
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-cyan-50 transition-colors">
+                                <span class="material-symbols-outlined text-cyan-500 text-[18px]">check_circle</span>
+                                Interaction Design
+                            </li>
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-cyan-50 transition-colors">
+                                <span class="material-symbols-outlined text-cyan-500 text-[18px]">check_circle</span>
+                                Responsive Design
+                            </li>
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-cyan-50 transition-colors">
+                                <span class="material-symbols-outlined text-cyan-500 text-[18px]">check_circle</span>
+                                Wireframing & Prototyping
+                            </li>
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-cyan-50 transition-colors">
+                                <span class="material-symbols-outlined text-cyan-500 text-[18px]">check_circle</span>
+                                User Journey Mapping
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div
+                        class="group relative p-8 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-emerald-500/50 transition-all duration-500 overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div
+                            class="w-14 h-14 bg-emerald-500/20 rounded-xl flex items-center justify-center mb-8 border border-emerald-500/30 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-emerald-400 text-3xl">code</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-6">Technical Foundations</h3>
+                        <ul class="space-y-4">
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-emerald-50 transition-colors">
+                                <span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>
+                                React & React Native
+                            </li>
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-emerald-50 transition-colors">
+                                <span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>
+                                HTML & CSS (Tailwind)
+                            </li>
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-emerald-50 transition-colors">
+                                <span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>
+                                Design-to-Code Feasibility
+                            </li>
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-emerald-50 transition-colors">
+                                <span class="material-symbols-outlined text-emerald-500 text-[18px]">check_circle</span>
+                                Version Control (Git)
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div
+                        class="group relative p-8 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-blue-500/50 transition-all duration-500 overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div
+                            class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center mb-8 border border-blue-500/30 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-blue-400 text-3xl">tactic</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-6">Workflow & Collaboration</h3>
+                        <ul class="space-y-4">
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-blue-50 transition-colors">
+                                <span class="material-symbols-outlined text-blue-500 text-[18px]">check_circle</span>
+                                Notion (Task Tracking, Project Documentation)
+                            </li>
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-blue-50 transition-colors">
+                                <span class="material-symbols-outlined text-blue-500 text-[18px]">check_circle</span>
+                                Agile/Scrum Process
+                            </li>
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-blue-50 transition-colors">
+                                <span class="material-symbols-outlined text-blue-500 text-[18px]">check_circle</span>
+                                Slack (Team Collaboration)
+                            </li>
+                            <li
+                                class="flex items-center gap-3 text-slate-400 group-hover:text-blue-50 transition-colors">
+                                <span class="material-symbols-outlined text-blue-500 text-[18px]">check_circle</span>
+                                Draw.io (Flowcharts & System Diagrams)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Education & Skills -->
+        <section class="bg-[#030712] py-20 md:py-32 relative overflow-hidden" id="education">
+            <div class="absolute top-1/2 -left-32 w-96 h-96 bg-cyan-600/10 rounded-full blur-[128px]"></div>
+            <div class="absolute top-1/2 -right-32 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px]"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+
+                <div>
+                    <div class="border-l-4 border-cyan-500 pl-6 mb-16">
+                        <h2 class="text-4xl font-bold text-white tracking-tight">Education</h2>
+                        <p class="text-cyan-400/60 mt-2 font-mono text-sm uppercase tracking-widest">Academic Background
+                        </p>
+                    </div>
+
+                    <div class="space-y-10 relative">
+                        <div
+                            class="absolute left-[3px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-cyan-500 via-cyan-500/50 to-transparent">
+                        </div>
+
+                        <div class="relative pl-12 group">
+                            <div
+                                class="absolute left-0 top-1 w-2 h-2 bg-slate-950 border-2 border-cyan-500 rounded-full shadow-[0_0_10px_rgba(34,211,238,0.7)] group-hover:scale-150 group-hover:bg-cyan-400 transition-all duration-300">
+                            </div>
+
+                            <div
+                                class="p-7 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-all duration-500">
+                                <h4
+                                    class="text-2xl font-bold text-white leading-snug mb-2 transition-colors group-hover:text-cyan-100">
+                                    Thammasat University</h4>
+                                <p class="text-slate-300 font-medium text-base mb-1">Bachelor of Science in Computer
+                                    Science | 2019 — 2025</p>
+                                <p class="text-cyan-400/80 font-mono text-sm mt-2 tracking-wide">GPA: 3.15/4.0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="border-l-4 border-purple-500 pl-6 mb-16">
+                        <h2 class="text-4xl font-bold text-white tracking-tight">Soft Skills &amp; Languages</h2>
+                        <p class="text-purple-400/60 mt-2 font-mono text-sm uppercase tracking-widest">Interpersonal &
+                            Linguistic</p>
+                    </div>
+
+                    <div class="space-y-10">
+                        <div class="flex flex-wrap gap-2.5">
+                            <span
+                                class="bg-slate-800/40 text-slate-300 px-4 py-2 rounded-md border border-slate-700 font-mono text-[12px] uppercase tracking-wider hover:bg-purple-500 hover:text-white hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-default">Communication</span>
+                            <span
+                                class="bg-slate-800/40 text-slate-300 px-4 py-2 rounded-md border border-slate-700 font-mono text-[12px] uppercase tracking-wider hover:bg-purple-500 hover:text-white hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-default">Collaboration</span>
+                            <span
+                                class="bg-slate-800/40 text-slate-300 px-4 py-2 rounded-md border border-slate-700 font-mono text-[12px] uppercase tracking-wider hover:bg-purple-500 hover:text-white hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-default">Problem-Solving</span>
+                            <span
+                                class="bg-slate-800/40 text-slate-300 px-4 py-2 rounded-md border border-slate-700 font-mono text-[12px] uppercase tracking-wider hover:bg-purple-500 hover:text-white hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-default">Adaptability</span>
+                            <span
+                                class="bg-slate-800/40 text-slate-300 px-4 py-2 rounded-md border border-slate-700 font-mono text-[12px] uppercase tracking-wider hover:bg-purple-500 hover:text-white hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-default">Empathy</span>
+                            <span
+                                class="bg-slate-800/40 text-slate-300 px-4 py-2 rounded-md border border-slate-700 font-mono text-[12px] uppercase tracking-wider hover:bg-purple-500 hover:text-white hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-default">Attention
+                                to detail</span>
+                            <span
+                                class="bg-slate-800/40 text-slate-300 px-4 py-2 rounded-md border border-slate-700 font-mono text-[12px] uppercase tracking-wider hover:bg-purple-500 hover:text-white hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-default">Critical
+                                thinking</span>
+                            <span
+                                class="bg-slate-800/40 text-slate-300 px-4 py-2 rounded-md border border-slate-700 font-mono text-[12px] uppercase tracking-wider hover:bg-purple-500 hover:text-white hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-default">Time
+                                management</span>
+                        </div>
+
+                        <div class="relative group mt-10">
+                            <div
+                                class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-2xl blur opacity-10 group-hover:opacity-30 transition duration-500">
+                            </div>
+
+                            <div
+                                class="relative p-8 rounded-2xl bg-slate-900/60 backdrop-blur-xl border border-slate-800 hover:border-slate-700/80 transition-all duration-300">
+                                <div class="flex items-center gap-3 mb-6">
+                                    <span class="material-symbols-outlined text-purple-400">translate</span>
+                                    <h4 class="text-xl font-semibold text-white tracking-tight">Languages</h4>
+                                </div>
+
+                                <div class="space-y-5">
+                                    <div
+                                        class="flex justify-between items-center py-3 border-b border-slate-800 group-hover:border-slate-700 transition-colors">
+                                        <span class="text-white font-medium text-lg">Thai</span>
+                                        <span
+                                            class="text-purple-300 font-mono text-[14px] uppercase border border-purple-500/30 bg-purple-500/10 px-3 py-1 rounded-full tracking-wider">Native</span>
+                                    </div>
+                                    <div
+                                        class="flex justify-between items-center py-3 border-b border-slate-800 group-hover:border-slate-700 transition-colors">
+                                        <span class="text-white font-medium text-lg">English</span>
+                                        <span
+                                            class="text-purple-300 font-mono text-[14px] uppercase border border-purple-500/30 bg-purple-500/10 px-3 py-1 rounded-full tracking-wider">working
+                                            proficiency</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer / Contact -->
+    <footer class="relative bg-[#030712] border-t border-slate-800/50 w-full py-16 overflow-hidden" id="contact">
+        <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-purple-600/5 rounded-full blur-[100px]"></div>
+
+        <div class="flex flex-col px-6 max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center w-full gap-12 mb-12">
+
+                <div class="space-y-6">
+                    <span class="text-3xl md:text-5xl font-bold text-white tracking-tighter block uppercase">
+                        THANAPORN HONGTHONG</span>
+                    </span>
+                    <p class="font-mono text-[14px] tracking-widest text-slate-400 flex items-center">
+                        <span class="material-symbols-outlined mr-3 text-purple-500">location_on</span>
+                        Nakhon Ratchasima, Thailand
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-col gap-6">
+                    <a class="flex items-center gap-4 text-slate-300 hover:text-purple-400 active:scale-95 transition-all group"
+                        href="mailto:thanaporn.h17@gmail.com">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:border-purple-500/50 group-hover:shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+                            <span class="material-symbols-outlined text-xl">mail</span>
+                        </div>
+                        <span class="font-['Inter'] text-sm tracking-wide">thanaporn.h17@gmail.com</span>
+                    </a>
+
+                    <a class="flex items-center gap-4 text-slate-300 hover:text-cyan-400 active:scale-95 transition-all group"
+                        href="tel:0884824500">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:border-cyan-500/50 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                            <span class="material-symbols-outlined text-xl">call</span>
+                        </div>
+                        <span class="font-['Inter'] text-sm tracking-wide">088-482-4500</span>
+                    </a>
+
+                    <a class="flex items-center gap-4 text-slate-300 hover:text-blue-400 active:scale-95 transition-all group"
+                        href="https://www.linkedin.com/in/thanaporn-hongthong-765796213/" target="_blank">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:border-blue-500/50 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </div>
+                        <span class="font-['Inter'] text-sm tracking-wide">LinkedIn</span>
+                    </a>
+
+                    <a class="flex items-center gap-4 text-slate-300 hover:text-white active:scale-95 transition-all group"
+                        href="https://github.com/Tnp17" target="_blank">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:border-slate-400 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </div>
+                        <span class="font-['Inter'] text-sm tracking-wide">GitHub</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-6">
+                <p class="font-mono text-[12px] uppercase tracking-[0.2em] text-slate-500 text-center sm:text-left">
+                    © 2026 Thanaporn Hongthong. All rights reserved.
+                </p>
+                <div class="flex gap-4">
+                    <button
+                        class="group relative px-6 py-2 bg-slate-900 border border-slate-700 rounded-full font-mono text-[10px] uppercase tracking-widest text-slate-300 hover:text-white hover:border-purple-500 transition-all"
+                        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        <span class="flex items-center gap-2">
+                            Back to top
+                            <span
+                                class="material-symbols-outlined text-sm group-hover:-translate-y-1 transition-transform">arrow_upward</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        // Close mobile menu when link clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+
+        // Active State Navigation Indicator
+        const sections = document.querySelectorAll('section[id], footer[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('nav-link-active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('nav-link-active');
+                }
+            });
+        });
+    </script>
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+
+        document.querySelectorAll('.aspect-video.group').forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('img');
+                if (img) {
+                    lightboxImg.src = img.src;
+                    lightbox.classList.remove('hidden');
+                    lightbox.classList.add('flex');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+            document.body.style.overflow = '';
+        };
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.closest('#lightbox-close') || e.target === lightbox.firstElementChild) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+
+</html>
