@@ -15,7 +15,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
-            "file": "d:\\work\\งาน\\สมัครงาน\\stitch_minimalist_inter_cv_portfolio\\index.html"
+            "file": "d:\\work\\งาน\\สมัครงาน\\tnp-portfolio\\index.html"
         }
     ]
 }
